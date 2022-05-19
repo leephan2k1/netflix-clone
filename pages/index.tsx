@@ -4,6 +4,10 @@ import Header from '~/components/Header';
 import requests from '~/utils/request';
 import { Movie } from '~/typings';
 import Row from '~/components/Row';
+import useAuth from '~/hooks/useAuth';
+import { useRecoilValue } from 'recoil';
+import { modalState } from '~/atoms/modalAtom';
+import Modal from '~/components/Modal';
 
 interface Props {
     netflixOriginals: Array<Movie>;
@@ -61,6 +65,11 @@ const Home = ({
     topRated,
     trendingNow,
 }: Props) => {
+    const { loading } = useAuth();
+    const showModal = useRecoilValue(modalState);
+
+    if (loading) return 'Loading';
+
     return (
         <div className="relative overflow-x-hidden bg-gradient-to-b">
             <Head>
@@ -81,6 +90,7 @@ const Home = ({
                     <Row title="Documentaries" movies={documentaries} />
                 </section>
             </main>
+            {showModal && <Modal />}
         </div>
     );
 };
