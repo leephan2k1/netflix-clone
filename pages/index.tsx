@@ -71,7 +71,11 @@ const Home = ({
     if (loading) return 'Loading';
 
     return (
-        <div className="relative overflow-x-hidden bg-gradient-to-b">
+        <div
+            className={`relative overflow-x-hidden bg-gradient-to-b ${
+                showModal && 'h-screen overflow-y-hidden'
+            }`}
+        >
             <Head>
                 <title>Home - Netflix</title>
                 <link rel="icon" href="/favicon.ico" />
